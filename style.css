@@ -38,9 +38,16 @@ section {
   border: 1px solid white;
   outline: none;
   background-color: transparent;
+  transition: .2s linear;
 }
 
-.steps button .active {
+.active {
+  background-color: #bee2fd;
+  color: #022959;
+}
+
+.steps button:hover {
+  cursor: pointer;
   background-color: #bee2fd;
   color: #022959;
 }
@@ -169,7 +176,7 @@ input::placeholder {
 
 /* STEPS */
 .plan {
-  /* display: none; */
+  display: none;
   max-width: 21.4375rem;
   width: 100%;
   margin: auto;
@@ -298,6 +305,11 @@ p.plan {
   border-radius: 50%;
   background-color: white;
   margin-left: 0.1rem;
+  transition: .2s linear;
+}
+
+.move__toggle {
+    margin-left: 1rem;
 }
 
 /* ADDS__ON */
@@ -306,7 +318,7 @@ p.plan {
 }
 
 .adds__on {
-  /* display: none; */
+  display: none;
   max-width: 21.4375rem;
   width: 100%;
   margin: auto;
@@ -376,7 +388,7 @@ p.addson__subheading {
 }
 
 .summary {
-  /* display: none; */
+  display: none;
   max-width: 21.4375rem;
   width: 100%;
   margin: auto;
@@ -506,7 +518,7 @@ p.addson__subheading {
 }
 
 .summary__thanks {
-    /* display: none; */
+  display: none;
   max-width: 21.4375rem;
   width: 100%;
   margin: auto;
