@@ -100,6 +100,17 @@ section {
   padding-bottom: 1rem;
 }
 
+input {
+  color: #022959;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+input:focus,
+input:active {
+  outline: 1px solid #483eff;
+}
+
 form {
   max-width: 18.4375rem;
   width: 100%;
@@ -314,10 +325,6 @@ p.plan {
 }
 
 /* ADDS__ON */
-.personal__info {
-  /* display: none; */
-}
-
 .adds__on {
   display: none;
   max-width: 21.4375rem;

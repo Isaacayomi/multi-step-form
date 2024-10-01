@@ -64,12 +64,12 @@
             <form action="#">
               <div class="name__input input__fields">
                 <label for="name">Name</label>
-                <input type="text" placeholder="e.g. Stephen King" />
+                <input type="text" class="name__field" placeholder="e.g. Stephen King" />
               </div>
 
               <div class="email__input input__fields">
                 <label for="email">Email</label>
-                <input type="email" placeholder="e.g. stephenking@lorem.com" />
+                <input type="email" class="email__field" placeholder="e.g. stephenking@lorem.com" />
               </div>
 
               <div class="phone__input input__fields">
@@ -77,8 +77,8 @@
                 <input
                   type="number"
                   name="phone__number"
-                  id="phone"
-                  placeholder="+1 234 567 890"
+                  id="phone" class="phone__field"
+                  placeholder="+1 234 567 890" maxlength="11"
                 />
               </div>
             </form>

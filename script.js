@@ -25,18 +25,28 @@ const toggleBtn = document.querySelector(".toggle");
 // Pages
 const pageArray = [page1, page2, page3, page4, page5];
 
+// Input Fields
+const inputs = document.querySelectorAll("input");
+const inputName = document.querySelector(".name__field");
+const inputEmail = document.querySelector(".email__field");
+const inputNumber = document.querySelector(".phone__field");
+
+// Buttons
+const nextBtn = document.querySelector(".next__btn");
+const prevBtn = document.querySelector(".previous__btn");
+
 const hideAllPages = () => {
   pageArray.forEach((page) => (page.style.display = "none"));
 };
 
-buttons.forEach(function (btn, i) {
-  btn.addEventListener("click", function (e) {
+buttons.forEach((btn, i) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
     hideAllPages();
     pageArray[i].style.display = "block";
 
     // Remove the active class from all buttons
-    buttons.forEach(function (button) {
+    buttons.forEach((button) => {
       button.classList.remove("active");
     });
 
@@ -45,7 +55,31 @@ buttons.forEach(function (btn, i) {
   });
 });
 
-toggleBtn.addEventListener("click", function () {
+const validateInputFields = () => {
+  inputs.forEach(function (input, i) {
+    if (input.value.trim().length === 0) {
+      console.log(`Empty field ${i}`);
+    } else {
+        console.log('Proceed guyy')
+    }
+  });
+
+  //Validate mail
+  let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!inputEmail.value.match(mailformat)) {
+    console.log("wrong email format");
+  } else {
+    console.log("correct");
+  }
+  return;
+};
+
+nextBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  validateInputFields();
+});
+
+toggleBtn.addEventListener("click", () => {
   if (!toggleBtn.classList.contains("move__toggle")) {
     toggleBtn.classList.add("move__toggle");
     arcadeBill.textContent = "$90/yr";
