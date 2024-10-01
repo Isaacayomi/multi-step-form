@@ -21,6 +21,7 @@ const btn3 = document.querySelector(".btn__3");
 const btn4 = document.querySelector(".btn__4");
 
 const toggleBtn = document.querySelector(".toggle");
+
 // Pages
 const pageArray = [page1, page2, page3, page4, page5];
 
@@ -32,9 +33,14 @@ buttons.forEach(function (btn, i) {
   btn.addEventListener("click", function (e) {
     e.preventDefault();
     hideAllPages();
-    buttons.forEach((button) => button.classList.remove("active"));
-
     pageArray[i].style.display = "block";
+
+    // Remove the active class from all buttons
+    buttons.forEach(function (button) {
+      button.classList.remove("active");
+    });
+
+    // Add the active class to only clicked buttons
     btn.classList.add("active");
   });
 });

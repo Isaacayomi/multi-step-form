@@ -4,6 +4,7 @@
   box-sizing: border-box;
   text-decoration: none;
   font-family: "Ubuntu", sans-serif;
+  transition: 0.2s linear;
 }
 
 section {
@@ -38,18 +39,18 @@ section {
   border: 1px solid white;
   outline: none;
   background-color: transparent;
-  transition: .2s linear;
+  transition: 0.2s linear;
 }
 
-.active {
+.steps .active {
   background-color: #bee2fd;
   color: #022959;
 }
 
 .steps button:hover {
   cursor: pointer;
-  background-color: #bee2fd;
-  color: #022959;
+  /* background-color: #bee2fd;
+  color: #022959; */
 }
 
 .step__plan {
@@ -305,11 +306,11 @@ p.plan {
   border-radius: 50%;
   background-color: white;
   margin-left: 0.1rem;
-  transition: .2s linear;
+  transition: 0.2s linear;
 }
 
 .move__toggle {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 /* ADDS__ON */
