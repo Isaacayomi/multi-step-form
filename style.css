@@ -124,6 +124,28 @@ form {
   flex-direction: column;
 }
 
+.labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p.error__msg {
+  color: #ee374a;
+  text-align: right;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  max-width: 8.5625rem;
+  width: 100%;
+  padding:0;
+}
+
+.name__err, .phone__err, .email__err {
+  display: none;
+}
+
 label {
   color: #022959;
   font-size: 0.75rem;
@@ -131,6 +153,8 @@ label {
   font-weight: 400;
   line-height: normal;
   padding-bottom: 0.19rem;
+  max-width: 7rem;
+  width: 100%;
 }
 
 input {

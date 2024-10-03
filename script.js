@@ -31,6 +31,12 @@ const inputName = document.querySelector(".name__field");
 const inputEmail = document.querySelector(".email__field");
 const inputNumber = document.querySelector(".phone__field");
 
+// Error message
+const errMsg = document.querySelectorAll(".error__msg");
+const nameErr = document.querySelector(".name__err");
+const emailErr = document.querySelector(".email__err");
+const phoneErr = document.querySelector(".phone__err");
+
 // Buttons
 const nextBtn = document.querySelector(".next__btn");
 const prevBtn = document.querySelector(".previous__btn");
@@ -56,21 +62,44 @@ buttons.forEach((btn, i) => {
 });
 
 const validateInputFields = () => {
+  let hasError = false; // Tracks if there is any error on either of the input fields
+
   inputs.forEach(function (input, i) {
     if (input.value.trim().length === 0) {
-      console.log(`Empty field ${i}`);
+      if (errMsg[i]) {
+        errMsg[i].style.display = "block";
+        input.style.border = "1px solid red";
+        hasError = true;
+      }
     } else {
-        console.log('Proceed guyy')
+      if (errMsg[i]) {
+        errMsg[i].style.display = "none";
+        input.style.border = "1px solid #d6d9e6";
+        hasError = false;
+      }
     }
   });
 
   //Validate mail
   let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!inputEmail.value.match(mailformat)) {
-    console.log("wrong email format");
+    emailErr.style.display = "block";
+    hasError = true;
   } else {
-    console.log("correct");
+    emailErr.style.display = "none";
+    hasError = false;
   }
+
+  // If there are no errors, proceed
+  if (!hasError) {
+    page1.style.display = "none";
+    page2.style.display = "block";
+    btn1.classList.remove("active");
+    btn2.classList.add("active");
+  } else {
+    console.log("There are some errors in the form.");
+  }
+
   return;
 };
 

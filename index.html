@@ -63,22 +63,43 @@
 
             <form action="#">
               <div class="name__input input__fields">
-                <label for="name">Name</label>
-                <input type="text" class="name__field" placeholder="e.g. Stephen King" />
+                <div class="labels">
+                  <label for="name">Name</label>
+                  <p class="error__msg name__err">Enter the Correct Format</p>
+                </div>
+
+                <input
+                  type="text"
+                  class="name__field"
+                  placeholder="e.g. Stephen King"
+                />
               </div>
 
               <div class="email__input input__fields">
-                <label for="email">Email</label>
-                <input type="email" class="email__field" placeholder="e.g. stephenking@lorem.com" />
+                <div class="labels">
+                  <label for="email">Email</label>
+                  <p class="error__msg email__err">Enter the Correct Format</p>
+                </div>
+
+                <input
+                  type="email"
+                  class="email__field"
+                  placeholder="e.g. stephenking@lorem.com"
+                />
               </div>
 
               <div class="phone__input input__fields">
-                <label for="phone">Phone Number</label>
+                <div class="labels">
+                  <label for="phone">Phone Number</label>
+                  <p class="error__msg phone__err">Enter the Correct Format</p>
+                </div>
                 <input
                   type="number"
                   name="phone__number"
-                  id="phone" class="phone__field"
-                  placeholder="+1 234 567 890" maxlength="11"
+                  id="phone"
+                  class="phone__field"
+                  placeholder="+1 234 567 890"
+                  maxlength="11"
                 />
               </div>
             </form>
@@ -201,8 +222,8 @@
           <p>Thank you!</p>
           <p>
             Thanks for confirming your subscription! We hope you have fun using
-            our platform. If you ever need support, please feel free to email us at
-            support@loremgaming.com
+            our platform. If you ever need support, please feel free to email us
+            at support@loremgaming.com
           </p>
         </div>
         <div class="proceedings__btn">
