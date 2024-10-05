@@ -139,10 +139,12 @@ p.error__msg {
   line-height: normal;
   max-width: 8.5625rem;
   width: 100%;
-  padding:0;
+  padding: 0;
 }
 
-.name__err, .phone__err, .email__err {
+.name__err,
+.phone__err,
+.email__err {
   display: none;
 }
 

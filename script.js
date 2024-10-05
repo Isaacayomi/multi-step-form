@@ -41,25 +41,36 @@ const phoneErr = document.querySelector(".phone__err");
 const nextBtn = document.querySelector(".next__btn");
 const prevBtn = document.querySelector(".previous__btn");
 
-const hideAllPages = () => {
+// buttons.forEach((btn, i) => {
+//   btn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     // hideAllPages();
+//   });
+// });
+
+// Page pagination
+let currentPageIndex = 0;
+const showPage = function (pageIndex) {
+  // Hide all pages
   pageArray.forEach((page) => (page.style.display = "none"));
-};
 
-buttons.forEach((btn, i) => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    hideAllPages();
-    pageArray[i].style.display = "block";
+  // Show page at provided index
+  pageArray[pageIndex].style.display = "block";
 
-    // Remove the active class from all buttons
-    buttons.forEach((button) => {
-      button.classList.remove("active");
-    });
+  // Update the current page index
+  currentPageIndex = pageIndex;
 
-    // Add the active class to only clicked buttons
-    btn.classList.add("active");
+  // Update 'Go Back' button visibility based on the current page
+  if (currentPageIndex === 0) {
+    prevBtn.innerHTML = ""; // Hide 'Go Back' on the first page
+  } else {
+    prevBtn.innerHTML = "Go Back"; // Show 'Go Back' on other pages
+  }
+
+  buttons.forEach((button, i) => {
+    button.classList.toggle("active", i === currentPageIndex);
   });
-});
+};
 
 const validateInputFields = () => {
   let hasError = false; // Tracks if there is any error on either of the input fields
@@ -92,10 +103,9 @@ const validateInputFields = () => {
 
   // If there are no errors, proceed
   if (!hasError) {
-    page1.style.display = "none";
-    page2.style.display = "block";
-    btn1.classList.remove("active");
-    btn2.classList.add("active");
+    if (currentPageIndex < pageArray.length - 1) {
+      showPage(currentPageIndex + 1); // Move to the next page
+    }
   } else {
     console.log("There are some errors in the form.");
   }
@@ -103,10 +113,7 @@ const validateInputFields = () => {
   return;
 };
 
-nextBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  validateInputFields();
-});
+showPage(0);
 
 toggleBtn.addEventListener("click", () => {
   if (!toggleBtn.classList.contains("move__toggle")) {
@@ -119,5 +126,18 @@ toggleBtn.addEventListener("click", () => {
     arcadeBill.textContent = "$9/mo";
     advancedBill.textContent = "$12/mo";
     proBill.textContent = "$15/mo";
+  }
+});
+
+nextBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  validateInputFields();
+});
+
+prevBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  // Show the previous page (e.g., move from page 2 to page 1)
+  if (currentPageIndex > 0) {
+    showPage(currentPageIndex - 1); // Move to the previous page
   }
 });
