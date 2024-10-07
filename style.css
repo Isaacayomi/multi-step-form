@@ -223,6 +223,10 @@ input::placeholder {
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
 }
 
+.plan:hover {
+  cursor: pointer;
+}
+
 .billings {
   margin-bottom: 2.31rem;
 }
@@ -256,8 +260,6 @@ input::placeholder {
   margin-bottom: 0.75rem;
 }
 
-.plan__active,
-.plan__active,
 .plan__active {
   border: 1px solid #483eff;
   background: #f8f9ff;

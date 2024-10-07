@@ -13,6 +13,12 @@ let arcadeBill = document.querySelector(".arcade__bill");
 let advancedBill = document.querySelector(".advanced__bill");
 let proBill = document.querySelector(".pro__bill");
 
+// Plans
+const planCards = document.querySelectorAll(".billings__plan");
+const arcardePlan = document.querySelector(".arcarde");
+const advancedPlan = document.querySelector(".advanced");
+const proPlan = document.querySelector(".pro");
+
 // Buttons
 const buttons = document.querySelectorAll(".step__buttons");
 const btn1 = document.querySelector(".btn__1");
@@ -22,8 +28,9 @@ const btn4 = document.querySelector(".btn__4");
 
 const toggleBtn = document.querySelector(".toggle");
 
-// Pages
+// Arrays
 const pageArray = [page1, page2, page3, page4, page5];
+const plansArray = [arcardePlan, advancedPlan, proPlan];
 
 // Input Fields
 const inputs = document.querySelectorAll("input");
@@ -41,15 +48,13 @@ const phoneErr = document.querySelector(".phone__err");
 const nextBtn = document.querySelector(".next__btn");
 const prevBtn = document.querySelector(".previous__btn");
 
-// buttons.forEach((btn, i) => {
-//   btn.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     // hideAllPages();
-//   });
-// });
+// Tracks if there is any error on either of the input fields
+let hasError = false;
+
+// Current Page Index
+let currentPageIndex = 0;
 
 // Page pagination
-let currentPageIndex = 0;
 const showPage = function (pageIndex) {
   // Hide all pages
   pageArray.forEach((page) => (page.style.display = "none"));
@@ -60,7 +65,7 @@ const showPage = function (pageIndex) {
   // Update the current page index
   currentPageIndex = pageIndex;
 
-  // Update 'Go Back' button visibility based on the current page
+  // Update Go Back button visibility based on the current page
   if (currentPageIndex === 0) {
     prevBtn.innerHTML = ""; // Hide 'Go Back' on the first page
   } else {
@@ -73,8 +78,6 @@ const showPage = function (pageIndex) {
 };
 
 const validateInputFields = () => {
-  let hasError = false; // Tracks if there is any error on either of the input fields
-
   inputs.forEach(function (input, i) {
     if (input.value.trim().length === 0) {
       if (errMsg[i]) {
@@ -106,28 +109,44 @@ const validateInputFields = () => {
     if (currentPageIndex < pageArray.length - 1) {
       showPage(currentPageIndex + 1); // Move to the next page
     }
-  } else {
-    console.log("There are some errors in the form.");
   }
-
   return;
 };
 
-showPage(0);
+const billings = () => {
+  planCards.forEach(function (bill) {
+    bill.addEventListener("click", function (e) {
+      // Reset the border of all plan cards first
+      planCards.forEach((card) => {
+        card.style.border = "1px solid #d6d9e6";
+      });
 
-toggleBtn.addEventListener("click", () => {
-  if (!toggleBtn.classList.contains("move__toggle")) {
-    toggleBtn.classList.add("move__toggle");
-    arcadeBill.textContent = "$90/yr";
-    advancedBill.textContent = "$120/yr";
-    proBill.textContent = "$150/yr";
-  } else {
-    toggleBtn.classList.remove("move__toggle");
-    arcadeBill.textContent = "$9/mo";
-    advancedBill.textContent = "$12/mo";
-    proBill.textContent = "$15/mo";
-  }
-});
+      // Set border to desired color
+      bill.style.border = "1px solid #483eff";
+    });
+  });
+};
+
+billings();
+
+const togglePriceBtn = () => {
+  toggleBtn.addEventListener("click", () => {
+    if (!toggleBtn.classList.contains("move__toggle")) {
+      toggleBtn.classList.add("move__toggle");
+      arcadeBill.textContent = "$90/yr";
+      advancedBill.textContent = "$120/yr";
+      proBill.textContent = "$150/yr";
+    } else {
+      toggleBtn.classList.remove("move__toggle");
+      arcadeBill.textContent = "$9/mo";
+      advancedBill.textContent = "$12/mo";
+      proBill.textContent = "$15/mo";
+    }
+  });
+};
+togglePriceBtn();
+
+showPage(0);
 
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
