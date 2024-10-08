@@ -151,6 +151,7 @@ const billings = () => {
     });
   });
 };
+billings();
 
 const validatePlanBills = () => {
   let planSelected = false;
@@ -177,14 +178,21 @@ const validatePlanBills = () => {
 
 togglePriceBtn();
 
-billings();
-
 showPage(0);
 
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  validateInputFields();
-  validatePlanBills();
+  if (currentPageIndex === 0) {
+    if (validateInputFields()) {
+      showPage(1);
+    }
+  }
+
+  if (currentPageIndex === 1) {
+    if (validatePlanBills()) {
+      showPage(2);
+    }
+  }
 });
 
 prevBtn.addEventListener("click", function (e) {
