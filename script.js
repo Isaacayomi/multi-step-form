@@ -115,6 +115,10 @@ const validateInputFields = () => {
 
 const togglePriceBtn = () => {
   toggleBtn.addEventListener("click", () => {
+    planCards.forEach((card) => {
+      card.style.border = "#d6d9e6";
+    });
+
     if (!toggleBtn.classList.contains("move__toggle")) {
       toggleBtn.classList.add("move__toggle");
       arcadeBill.textContent = 90;
@@ -149,14 +153,26 @@ const billings = () => {
 };
 
 const validatePlanBills = () => {
-  if ((pageArray[1].style.display = "block"))
-    planCards.forEach((card) => {
-      if ((card.style.border = "1px solid #d6d9e6")) {
-        currentPageIndex = 1;
-        showPage(currentPageIndex);
-        console.log("No plan was selected");
-      }
-    });
+  let planSelected = false;
+
+  planCards.forEach((card) => {
+    const computedBorderColor = window.getComputedStyle(card).borderColor;
+    if (
+      computedBorderColor === "rgb(72, 62, 255)" ||
+      computedBorderColor === "#483eff"
+    ) {
+      planSelected = true;
+    }
+  });
+
+  if (planSelected) {
+    currentPageIndex = 2; // Allow proceeding to next page
+    showPage(currentPageIndex);
+  } else {
+    currentPageIndex = 1;
+    showPage(currentPageIndex);
+    console.log("No plan was selected");
+  }
 };
 
 togglePriceBtn();
