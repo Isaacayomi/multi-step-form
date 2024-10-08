@@ -139,14 +139,24 @@ const billings = () => {
 
       // Set border to desired color
       bill.style.border = "1px solid #483eff";
-      //   console.log(bill.innerHTML);
 
       const priceElement = bill.querySelector("p span.plan__price");
       if (priceElement) {
-        console.log(priceElement.innerText);
+        console.log(priceElement.innerText.trim());
       }
     });
   });
+};
+
+const validatePlanBills = () => {
+  if ((pageArray[1].style.display = "block"))
+    planCards.forEach((card) => {
+      if ((card.style.border = "1px solid #d6d9e6")) {
+        currentPageIndex = 1;
+        showPage(currentPageIndex);
+        console.log("No plan was selected");
+      }
+    });
 };
 
 togglePriceBtn();
@@ -158,6 +168,7 @@ showPage(0);
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
   validateInputFields();
+  validatePlanBills();
 });
 
 prevBtn.addEventListener("click", function (e) {
