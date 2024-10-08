@@ -9,9 +9,9 @@ const page4 = document.querySelector(".summary");
 const page5 = document.querySelector(".summary__thanks");
 
 //Bills
-let arcadeBill = document.querySelector(".arcade__bill");
-let advancedBill = document.querySelector(".advanced__bill");
-let proBill = document.querySelector(".pro__bill");
+let arcadeBill = document.querySelector(".arcade__plan__price");
+let advancedBill = document.querySelector(".advanced__plan__price");
+let proBill = document.querySelector(".pro__plan__price");
 
 // Plans
 const planCards = document.querySelectorAll(".billings__plan");
@@ -113,6 +113,22 @@ const validateInputFields = () => {
   return;
 };
 
+const togglePriceBtn = () => {
+  toggleBtn.addEventListener("click", () => {
+    if (!toggleBtn.classList.contains("move__toggle")) {
+      toggleBtn.classList.add("move__toggle");
+      arcadeBill.textContent = 90;
+      advancedBill.textContent = 120;
+      proBill.textContent = 150;
+    } else {
+      toggleBtn.classList.remove("move__toggle");
+      arcadeBill.textContent = 9;
+      advancedBill.textContent = 12;
+      proBill.textContent = 15;
+    }
+  });
+};
+
 const billings = () => {
   planCards.forEach(function (bill) {
     bill.addEventListener("click", function (e) {
@@ -123,28 +139,19 @@ const billings = () => {
 
       // Set border to desired color
       bill.style.border = "1px solid #483eff";
+      //   console.log(bill.innerHTML);
+
+      const priceElement = bill.querySelector("p span.plan__price");
+      if (priceElement) {
+        console.log(priceElement.innerText);
+      }
     });
   });
 };
 
-billings();
-
-const togglePriceBtn = () => {
-  toggleBtn.addEventListener("click", () => {
-    if (!toggleBtn.classList.contains("move__toggle")) {
-      toggleBtn.classList.add("move__toggle");
-      arcadeBill.textContent = "$90/yr";
-      advancedBill.textContent = "$120/yr";
-      proBill.textContent = "$150/yr";
-    } else {
-      toggleBtn.classList.remove("move__toggle");
-      arcadeBill.textContent = "$9/mo";
-      advancedBill.textContent = "$12/mo";
-      proBill.textContent = "$15/mo";
-    }
-  });
-};
 togglePriceBtn();
+
+billings();
 
 showPage(0);
 
