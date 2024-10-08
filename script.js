@@ -19,6 +19,9 @@ const arcardePlan = document.querySelector(".arcarde");
 const advancedPlan = document.querySelector(".advanced");
 const proPlan = document.querySelector(".pro");
 
+// Add on
+const addOnPrice = document.querySelectorAll(".add__ons__selections");
+
 // Buttons
 const buttons = document.querySelectorAll(".step__buttons");
 const btn1 = document.querySelector(".btn__1");
@@ -124,11 +127,27 @@ const togglePriceBtn = () => {
       arcadeBill.textContent = 90;
       advancedBill.textContent = 120;
       proBill.textContent = 150;
+
+      addOnPrice.forEach((price, i) => {
+        const addOnPriceEl = price.querySelector("p span.addon__price");
+        // console.log(addOnPriceEl.innerText);
+        if (i === 0) {
+          addOnPriceEl.innerText = 10;
+        } else {
+          addOnPriceEl.innerText = 20;
+        }
+      });
     } else {
       toggleBtn.classList.remove("move__toggle");
       arcadeBill.textContent = 9;
       advancedBill.textContent = 12;
       proBill.textContent = 15;
+
+      addOnPrice.forEach((price, i) => {
+        const addOnPriceEl = price.querySelector("p span.addon__price");
+        if (i === 0) addOnPriceEl.innerText = 1;
+        else addOnPriceEl.innerText = 2;
+      });
     }
   });
 };
@@ -175,6 +194,8 @@ const validatePlanBills = () => {
     console.log("No plan was selected");
   }
 };
+
+
 
 togglePriceBtn();
 
