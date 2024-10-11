@@ -51,6 +51,9 @@ const phoneErr = document.querySelector(".phone__err");
 const nextBtn = document.querySelector(".next__btn");
 const prevBtn = document.querySelector(".previous__btn");
 
+// Checkbox
+const checkBoxes = document.querySelectorAll(".checkbox");
+
 // Tracks if there is any error on either of the input fields
 let hasError = false;
 
@@ -119,9 +122,8 @@ const validateInputFields = () => {
 const togglePriceBtn = () => {
   toggleBtn.addEventListener("click", () => {
     planCards.forEach((card) => {
-      card.style.border = "#d6d9e6";
+      card.style.border = "1px solid #d6d9e6";
     });
-
     if (!toggleBtn.classList.contains("move__toggle")) {
       toggleBtn.classList.add("move__toggle");
       arcadeBill.textContent = 90;
@@ -132,9 +134,9 @@ const togglePriceBtn = () => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
         // console.log(addOnPriceEl.innerText);
         if (i === 0) {
-          addOnPriceEl.innerText = 10;
+          addOnPriceEl.innerHTML = 10;
         } else {
-          addOnPriceEl.innerText = 20;
+          addOnPriceEl.innerHTML = 20;
         }
       });
     } else {
@@ -145,8 +147,8 @@ const togglePriceBtn = () => {
 
       addOnPrice.forEach((price, i) => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
-        if (i === 0) addOnPriceEl.innerText = 1;
-        else addOnPriceEl.innerText = 2;
+        if (i === 0) addOnPriceEl.innerHTML = 1;
+        else addOnPriceEl.innerHTML = 2;
       });
     }
   });
@@ -195,9 +197,29 @@ const validatePlanBills = () => {
   }
 };
 
-
-
 togglePriceBtn();
+
+const validateCheckBox = () => {
+  checkBoxes.forEach((checkBox, i) => {
+    if (!checkBox.checked) {
+      console.log("Please pick one");
+    }
+    checkBox.addEventListener("click", function () {
+      // Gets the closest parent element of checkbox and the title
+      const parentElement = checkBox.closest(".add__ons__selections");
+      if (checkBox.checked) {
+        const addsPicked = parentElement.querySelector(".add__on p.title").textContent;
+
+        console.log(true, i, addsPicked);
+        parentElement.style.border = `1px solid #483eff`;
+      } else {
+        parentElement.style.border = `1px solid #d6d9e6`;
+      }
+    });
+  });
+};
+
+validateCheckBox();
 
 showPage(0);
 
