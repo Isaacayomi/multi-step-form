@@ -199,27 +199,30 @@ const validatePlanBills = () => {
 
 togglePriceBtn();
 
+let addOnsPicked = false;
 const validateCheckBox = () => {
   checkBoxes.forEach((checkBox, i) => {
-    if (!checkBox.checked) {
-      console.log("Please pick one");
-    }
     checkBox.addEventListener("click", function () {
       // Gets the closest parent element of checkbox and the title
       const parentElement = checkBox.closest(".add__ons__selections");
       if (checkBox.checked) {
-        const addsPicked = parentElement.querySelector(".add__on p.title").textContent;
-
+        const addsPicked =
+          parentElement.querySelector(".add__on p.title").textContent;
         console.log(true, i, addsPicked);
         parentElement.style.border = `1px solid #483eff`;
+        addOnsPicked = true;
       } else {
         parentElement.style.border = `1px solid #d6d9e6`;
+        addOnsPicked = false;
       }
     });
   });
 };
+validateCheckBox()
 
-validateCheckBox();
+const isAnyCheckboxChecked = () => {
+  return Array.from(checkBoxes).some((checkBox) => checkBox.checked);
+};
 
 showPage(0);
 
@@ -234,6 +237,15 @@ nextBtn.addEventListener("click", function (e) {
   if (currentPageIndex === 1) {
     if (validatePlanBills()) {
       showPage(2);
+    }
+  }
+
+  if (currentPageIndex === 2) {
+    if (isAnyCheckboxChecked()) {
+      currentPageIndex = 3;
+      showPage(3);
+    } else {
+      console.log("None was selected");
     }
   }
 });
