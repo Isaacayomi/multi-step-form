@@ -69,6 +69,7 @@ const checkBoxes = document.querySelectorAll(".checkbox");
 // Summary field
 const planSelected = document.querySelector(".selected__plan");
 const durationSelected = document.querySelector(".selected__duration");
+const addsOnDuration = document.querySelectorAll(".addons__duration");
 
 const finalPriceDuration = document.querySelector(".final__price__duration");
 const finalPrice = document.querySelector(".price");
@@ -153,6 +154,10 @@ const togglePriceBtn = () => {
       proPlanPriceDuration.textContent = "yr";
       advancedPlanPriceDuration.textContent = "yr";
 
+      addsOnDuration.forEach(function(addsonduration) {
+        addsonduration.innerHTML = 'yr'
+      })
+
       bonusPlan.forEach(function (bonusplan) {
         bonusplan.style.display = "block";
       });
@@ -174,6 +179,10 @@ const togglePriceBtn = () => {
       arcardePlanPriceDuration.textContent = "mo";
       proPlanPriceDuration.textContent = "mo";
       advancedPlanPriceDuration.textContent = "mo";
+
+      addsOnDuration.forEach(function(addsonduration) {
+        addsonduration.innerHTML = 'mo'
+      })
 
       bonusPlan.forEach(function (bonusplan) {
         bonusplan.style.display = "none";
