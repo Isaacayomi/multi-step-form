@@ -71,7 +71,8 @@
                 <input
                   type="text"
                   class="name__field"
-                  placeholder="e.g. Stephen King" value="King david"
+                  placeholder="e.g. Stephen King"
+                  value="King david"
                 />
               </div>
 
@@ -84,7 +85,8 @@
                 <input
                   type="email"
                   class="email__field"
-                  placeholder="e.g. stephenking@lorem.com" value="ksdfk@gmail.com"
+                  placeholder="e.g. stephenking@lorem.com"
+                  value="ksdfk@gmail.com"
                 />
               </div>
 
@@ -99,7 +101,8 @@
                   id="phone"
                   class="phone__field"
                   placeholder="+1 234 567 890"
-                  maxlength="11" value="88123812318"
+                  maxlength="11"
+                  value="88123812318"
                 />
               </div>
             </form>
@@ -115,10 +118,12 @@
               <div class="arcarde billings__plan">
                 <img src="./images/Group 11.png" alt="arcade img" />
                 <div class="arcarde__txt">
-                  <p class="bill">Arcade</p>
+                  <p class="bill plan__bill">Arcade</p>
                   <p class="bill__plan arcade__bill">
-                    $<span class="plan__price arcade__plan__price">9</span>/mo
+                    $<span class="plan__price arcade__plan__price">9</span
+                    >/<span class="arcarde__plan__price__duration">mo</span>
                   </p>
+                  <p class="bonus__plan">2 Months Free</p>
                 </div>
               </div>
 
@@ -128,8 +133,9 @@
                   <p class="bill">Advanced</p>
                   <p class="bill__plan advanced__bill">
                     $<span class="plan__price advanced__plan__price"> 12</span
-                    >/mo
+                    >/<span class="advanced__plan__price__duration">mo</span>
                   </p>
+                  <p class="bonus__plan">2 Months Free</p>
                 </div>
               </div>
 
@@ -138,8 +144,12 @@
                 <div class="arcarde__txt">
                   <p class="bill">Pro</p>
                   <p class="bill__plan pro__bill">
-                    $<span class="plan__price pro__plan__price">15</span>/mo
+                    $<span class="plan__price pro__plan__price">15</span>/<span
+                      class="pro__plan__price__duration"
+                      >mo</span
+                    >
                   </p>
+                  <p class="bonus__plan">2 Months Free</p>
                 </div>
               </div>
             </div>
@@ -164,7 +174,9 @@
                   <p class="title">Online Service</p>
                   <p class="description">Access to multiplayer games</p>
                 </div>
-                <p class="add__on__price">+$<span class="addon__price">1</span>/mo</p>
+                <p class="add__on__price">
+                  +$<span class="addon__price">1</span>/mo
+                </p>
               </div>
             </div>
 
@@ -175,7 +187,9 @@
                   <p class="title">Larger Storage</p>
                   <p class="description">Extra 1TB of cloud save</p>
                 </div>
-                <p class="add__on__price">+$<span class="addon__price">2</span>/mo</p>
+                <p class="add__on__price">
+                  +$<span class="addon__price">2</span>/mo
+                </p>
               </div>
             </div>
 
@@ -186,7 +200,9 @@
                   <p class="title">Customizable Profile</p>
                   <p class="description">Custom theme on profile</p>
                 </div>
-                <p class="add__on__price">+$<span class="addon__price">2</span>/mo</p>
+                <p class="add__on__price">
+                  +$<span class="addon__price">2</span>/mo
+                </p>
               </div>
             </div>
           </div>
@@ -200,10 +216,16 @@
             <div class="checkout__section">
               <div class="checkout">
                 <div class="plan__selected">
-                  <p class="selected__plan">Arcade (Monthly)</p>
+                  <p>
+                    <span class="selected__plan">Arcade</span>
+
+                    <span class="selected__duration">(Monthly)</span>
+                  </p>
                   <p class="change__plan">Change</p>
                 </div>
-                <p class="price">$9/mo</p>
+                <p class="price">
+                  $9/<span class="final__price__duration">mo</span>
+                </p>
               </div>
 
               <div class="services__selected">

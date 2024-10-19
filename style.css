@@ -279,6 +279,11 @@ p.bill {
   line-height: normal;
 }
 
+p.bonus__plan {
+  color: #022959;
+  display: none;
+}
+
 p.plan {
   color: #9699aa;
   font-size: 0.875rem;

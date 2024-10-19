@@ -12,6 +12,15 @@ const page5 = document.querySelector(".summary__thanks");
 let arcadeBill = document.querySelector(".arcade__plan__price");
 let advancedBill = document.querySelector(".advanced__plan__price");
 let proBill = document.querySelector(".pro__plan__price");
+let arcardePlanPriceDuration = document.querySelector(
+  ".arcarde__plan__price__duration"
+);
+let proPlanPriceDuration = document.querySelector(
+  ".pro__plan__price__duration"
+);
+let advancedPlanPriceDuration = document.querySelector(
+  ".advanced__plan__price__duration"
+);
 
 // Plans
 const planCards = document.querySelectorAll(".billings__plan");
@@ -31,6 +40,9 @@ const btn4 = document.querySelector(".btn__4");
 
 const toggleBtn = document.querySelector(".toggle");
 
+const bonusPlan = document.querySelectorAll(".bonus__plan");
+
+// console.log(bonusPlan)
 // Arrays
 const pageArray = [page1, page2, page3, page4, page5];
 const plansArray = [arcardePlan, advancedPlan, proPlan];
@@ -53,6 +65,13 @@ const prevBtn = document.querySelector(".previous__btn");
 
 // Checkbox
 const checkBoxes = document.querySelectorAll(".checkbox");
+
+// Summary field
+const planSelected = document.querySelector(".selected__plan");
+const durationSelected = document.querySelector(".selected__duration");
+
+const finalPriceDuration = document.querySelector(".final__price__duration");
+const finalPrice = document.querySelector(".price");
 
 // Tracks if there is any error on either of the input fields
 let hasError = false;
@@ -130,6 +149,13 @@ const togglePriceBtn = () => {
       advancedBill.textContent = 120;
       proBill.textContent = 150;
 
+      arcardePlanPriceDuration.textContent = "yr";
+      proPlanPriceDuration.textContent = "yr";
+      advancedPlanPriceDuration.textContent = "yr";
+
+      bonusPlan.forEach(function (bonusplan) {
+        bonusplan.style.display = "block";
+      });
       addOnPrice.forEach((price, i) => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
         // console.log(addOnPriceEl.innerText);
@@ -145,6 +171,13 @@ const togglePriceBtn = () => {
       advancedBill.textContent = 12;
       proBill.textContent = 15;
 
+      arcardePlanPriceDuration.textContent = "mo";
+      proPlanPriceDuration.textContent = "mo";
+      advancedPlanPriceDuration.textContent = "mo";
+
+      bonusPlan.forEach(function (bonusplan) {
+        bonusplan.style.display = "none";
+      });
       addOnPrice.forEach((price, i) => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
         if (i === 0) addOnPriceEl.innerHTML = 1;
@@ -165,9 +198,27 @@ const billings = () => {
       // Set border to desired color
       bill.style.border = "1px solid #483eff";
 
-      const priceElement = bill.querySelector("p span.plan__price");
-      if (priceElement) {
-        console.log(priceElement.innerText.trim());
+      const priceElement1 = bill.querySelector("p span.plan__price");
+      const priceElement2 = bill.querySelector(".bill").innerText;
+      console.log(planSelected.innerHTML);
+      console.log(durationSelected.innerHTML);
+      if (priceElement1) {
+        // console.log(priceElement1.innerText.trim().length);
+        planSelected.innerHTML = priceElement2;
+        // durationSelected.innerHTML = ;
+        // fix: if price element is two digit, duration selected should be monthly else it should be yearly
+        console.log(priceElement1.innerText.trim());
+        if (priceElement1.innerText.trim().length > 2) {
+          durationSelected.innerHTML = ` (Yearly)`;
+          finalPriceDuration.innerHTML = "yr";
+          finalPrice.innerHTML = `${priceElement1.innerText.trim()}/yr`;
+        } else {
+          durationSelected.innerHTML = ` (Monthly)`;
+          finalPriceDuration.innerHTML = "mo";
+          finalPrice.innerHTML = `${priceElement1.innerText.trim()}/mo`;
+        }
+
+        // console.log(priceElement2);
       }
     });
   });
@@ -218,11 +269,15 @@ const validateCheckBox = () => {
     });
   });
 };
-validateCheckBox()
+validateCheckBox();
 
 const isAnyCheckboxChecked = () => {
   return Array.from(checkBoxes).some((checkBox) => checkBox.checked);
 };
+
+// const checkOut = () => {
+
+// }
 
 showPage(0);
 
