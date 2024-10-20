@@ -74,6 +74,8 @@ const addsOnDuration = document.querySelectorAll(".addons__duration");
 const finalPriceDuration = document.querySelector(".final__price__duration");
 const finalPrice = document.querySelector(".price");
 
+let selectedServices = document.querySelector(".selected__services");
+
 // Tracks if there is any error on either of the input fields
 let hasError = false;
 
@@ -154,9 +156,9 @@ const togglePriceBtn = () => {
       proPlanPriceDuration.textContent = "yr";
       advancedPlanPriceDuration.textContent = "yr";
 
-      addsOnDuration.forEach(function(addsonduration) {
-        addsonduration.innerHTML = 'yr'
-      })
+      addsOnDuration.forEach(function (addsonduration) {
+        addsonduration.innerHTML = "yr";
+      });
 
       bonusPlan.forEach(function (bonusplan) {
         bonusplan.style.display = "block";
@@ -180,9 +182,9 @@ const togglePriceBtn = () => {
       proPlanPriceDuration.textContent = "mo";
       advancedPlanPriceDuration.textContent = "mo";
 
-      addsOnDuration.forEach(function(addsonduration) {
-        addsonduration.innerHTML = 'mo'
-      })
+      addsOnDuration.forEach(function (addsonduration) {
+        addsonduration.innerHTML = "mo";
+      });
 
       bonusPlan.forEach(function (bonusplan) {
         bonusplan.style.display = "none";
@@ -260,15 +262,30 @@ const validatePlanBills = () => {
 togglePriceBtn();
 
 let addOnsPicked = false;
+
+let selectedAddOns = [];
+let addsPicked = "";
+let addonPrice = "";
 const validateCheckBox = () => {
   checkBoxes.forEach((checkBox, i) => {
     checkBox.addEventListener("click", function () {
       // Gets the closest parent element of checkbox and the title
       const parentElement = checkBox.closest(".add__ons__selections");
       if (checkBox.checked) {
-        const addsPicked =
+        addsPicked =
           parentElement.querySelector(".add__on p.title").textContent;
-        console.log(true, i, addsPicked);
+
+        let alreadySelected = false;
+        for (let j = 0; j < selectedAddOns.length; j++) {
+          if (selectedAddOns[j].title === addsPicked) {
+            alreadySelected = true;
+            break;
+          }
+        }
+
+        addonPrice = parentElement.querySelector(".addon__price").textContent;
+
+        console.log(true, i, addsPicked, addonPrice);
         parentElement.style.border = `1px solid #483eff`;
         addOnsPicked = true;
       } else {
@@ -284,9 +301,21 @@ const isAnyCheckboxChecked = () => {
   return Array.from(checkBoxes).some((checkBox) => checkBox.checked);
 };
 
-// const checkOut = () => {
+const summary = () => {
+  selectedServices.innerHTML = "";
 
-// }
+  if (isAnyCheckboxChecked()) {
+    let html = `
+    <div class = 'services__selected'>
+    <p class = 'service'>${addsPicked}</p>
+    <p class='service__price'>+$${addonPrice}/mo </p>
+    </div>
+    `;
+
+    selectedServices.insertAdjacentHTML("afterbegin", html);
+  }
+};
+summary();
 
 showPage(0);
 
@@ -308,6 +337,7 @@ nextBtn.addEventListener("click", function (e) {
     if (isAnyCheckboxChecked()) {
       currentPageIndex = 3;
       showPage(3);
+      summary();
     } else {
       console.log("None was selected");
     }
