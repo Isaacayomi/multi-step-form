@@ -261,7 +261,7 @@ const calculateTotal = () => {
   // Determine if the toggle is set to yearly or monthly
   const isYearly = toggleBtn.classList.contains("move__toggle");
   const duration = isYearly ? "yr" : "mo";
-  
+
   // Initialize the total price
   let total = 0;
 
@@ -282,7 +282,6 @@ const calculateTotal = () => {
     totalLabelElement.innerText = "Total (Per Month)";
   }
 };
-
 
 let addOnsPicked = false;
 let addsPicked = "";
@@ -374,6 +373,18 @@ nextBtn.addEventListener("click", function (e) {
       console.log("None was selected");
     }
   }
+
+  if (currentPageIndex === 3) {
+    prevBtn.innerHTML = "";
+    nextBtn.innerHTML = "Confirm";
+    nextBtn.addEventListener("click", function () {
+      showPage(4);
+      prevBtn.style.display ='none'
+      nextBtn.style.display ='none'
+    });
+  }
+
+ 
 });
 
 prevBtn.addEventListener("click", function (e) {
