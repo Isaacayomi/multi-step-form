@@ -260,8 +260,8 @@ togglePriceBtn();
 const calculateTotal = () => {
   // Determine if the toggle is set to yearly or monthly
   const isYearly = toggleBtn.classList.contains("move__toggle");
-  let duration = isYearly ? "yr" : "mo";
-
+  const duration = isYearly ? "yr" : "mo";
+  
   // Initialize the total price
   let total = 0;
 
@@ -273,7 +273,16 @@ const calculateTotal = () => {
   // Update the total price element
   const totalPriceElement = document.querySelector(".total__price__");
   totalPriceElement.textContent = `$${total}/${duration}`;
+
+  // Update the total price label based on the duration
+  const totalLabelElement = document.querySelector(".total__selected");
+  if (isYearly) {
+    totalLabelElement.innerText = "Total (Per Year)";
+  } else {
+    totalLabelElement.innerText = "Total (Per Month)";
+  }
 };
+
 
 let addOnsPicked = false;
 let addsPicked = "";
