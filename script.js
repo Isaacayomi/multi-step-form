@@ -146,8 +146,12 @@ const togglePriceBtn = () => {
     planCards.forEach((card) => {
       card.style.border = "1px solid #d6d9e6";
     });
-    if (!toggleBtn.classList.contains("move__toggle")) {
+
+    const isYearly = !toggleBtn.classList.contains("move__toggle");
+
+    if (isYearly) {
       toggleBtn.classList.add("move__toggle");
+
       arcadeBill.textContent = 90;
       advancedBill.textContent = 120;
       proBill.textContent = 150;
@@ -156,24 +160,21 @@ const togglePriceBtn = () => {
       proPlanPriceDuration.textContent = "yr";
       advancedPlanPriceDuration.textContent = "yr";
 
-      addsOnDuration.forEach(function (addsonduration) {
+      addsOnDuration.forEach((addsonduration) => {
         addsonduration.innerHTML = "yr";
       });
 
-      bonusPlan.forEach(function (bonusplan) {
+      bonusPlan.forEach((bonusplan) => {
         bonusplan.style.display = "block";
       });
+
       addOnPrice.forEach((price, i) => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
-        // console.log(addOnPriceEl.innerText);
-        if (i === 0) {
-          addOnPriceEl.innerHTML = 10;
-        } else {
-          addOnPriceEl.innerHTML = 20;
-        }
+        addOnPriceEl.innerHTML = i === 0 ? 10 : 20;
       });
     } else {
       toggleBtn.classList.remove("move__toggle");
+
       arcadeBill.textContent = 9;
       advancedBill.textContent = 12;
       proBill.textContent = 15;
@@ -182,31 +183,31 @@ const togglePriceBtn = () => {
       proPlanPriceDuration.textContent = "mo";
       advancedPlanPriceDuration.textContent = "mo";
 
-      addsOnDuration.forEach(function (addsonduration) {
+      addsOnDuration.forEach((addsonduration) => {
         addsonduration.innerHTML = "mo";
       });
 
-      bonusPlan.forEach(function (bonusplan) {
-        bonusplan.style.display = "none";
+      bonusPlan.forEach((bonusplan) => {
+        bonusplan.style.display = "none"; // Hide yearly bonuses
       });
+
       addOnPrice.forEach((price, i) => {
         const addOnPriceEl = price.querySelector("p span.addon__price");
-        if (i === 0) addOnPriceEl.innerHTML = 1;
-        else addOnPriceEl.innerHTML = 2;
+        addOnPriceEl.innerHTML = i === 0 ? 1 : 2;
       });
     }
+
+    summary();
   });
 };
 
 const billings = () => {
   planCards.forEach(function (bill) {
     bill.addEventListener("click", function (e) {
-      // Reset the border of all plan cards first
       planCards.forEach((card) => {
         card.style.border = "1px solid #d6d9e6";
       });
 
-      // Set border to desired color
       bill.style.border = "1px solid #483eff";
 
       const priceElement1 = bill.querySelector("p span.plan__price");
@@ -214,10 +215,7 @@ const billings = () => {
       console.log(planSelected.innerHTML);
       console.log(durationSelected.innerHTML);
       if (priceElement1) {
-        // console.log(priceElement1.innerText.trim().length);
         planSelected.innerHTML = priceElement2;
-        // durationSelected.innerHTML = ;
-        // fix: if price element is two digit, duration selected should be monthly else it should be yearly
         console.log(priceElement1.innerText.trim());
         if (priceElement1.innerText.trim().length > 2) {
           durationSelected.innerHTML = ` (Yearly)`;
@@ -228,8 +226,6 @@ const billings = () => {
           finalPriceDuration.innerHTML = "mo";
           finalPrice.innerHTML = `${priceElement1.innerText.trim()}/mo`;
         }
-
-        // console.log(priceElement2);
       }
     });
   });
@@ -261,37 +257,80 @@ const validatePlanBills = () => {
 
 togglePriceBtn();
 
-let addOnsPicked = false;
+const calculateTotal = () => {
+  // Determine if the toggle is set to yearly or monthly
+  const isYearly = toggleBtn.classList.contains("move__toggle");
+  let duration = isYearly ? "yr" : "mo";
 
-let selectedAddOns = [];
+  // Initialize the total price
+  let total = 0;
+
+  // Loop through the selected add-ons to calculate the total price
+  selectedAddOns.forEach(({ price }) => {
+    total += parseInt(price, 10); // Ensure price is converted to a number
+  });
+
+  // Update the total price element
+  const totalPriceElement = document.querySelector(".total__price__");
+  totalPriceElement.textContent = `$${total}/${duration}`;
+};
+
+let addOnsPicked = false;
 let addsPicked = "";
 let addonPrice = "";
+
+const summary = () => {
+  selectedServices.innerHTML = ""; // Clear previous list
+
+  const isYearly = toggleBtn.classList.contains("move__toggle");
+  const duration = isYearly ? "yr" : "mo";
+
+  selectedAddOns.forEach(({ title, price }) => {
+    let html = `
+      <div class="services__selected">
+        <p class="service">${title}</p>
+        <p class="service__price">+$${price}/<span class="addonprice">${duration}</span></p>
+      </div>
+    `;
+
+    selectedServices.insertAdjacentHTML("beforeend", html);
+  });
+
+  // Calculate and display total price
+  calculateTotal();
+};
+
+let selectedAddOns = [];
 const validateCheckBox = () => {
-  checkBoxes.forEach((checkBox, i) => {
+  checkBoxes.forEach((checkBox) => {
     checkBox.addEventListener("click", function () {
-      // Gets the closest parent element of checkbox and the title
       const parentElement = checkBox.closest(".add__ons__selections");
       if (checkBox.checked) {
-        addsPicked =
+        const title =
           parentElement.querySelector(".add__on p.title").textContent;
+        const price = parentElement.querySelector(".addon__price").textContent;
 
-        let alreadySelected = false;
-        for (let j = 0; j < selectedAddOns.length; j++) {
-          if (selectedAddOns[j].title === addsPicked) {
-            alreadySelected = true;
-            break;
-          }
-        }
+        // Add to the selected list
+        selectedAddOns.push({ title, price });
 
-        addonPrice = parentElement.querySelector(".addon__price").textContent;
+        // Update addsPicked and addonPrice
+        addsPicked = title;
+        addonPrice = price;
 
-        console.log(true, i, addsPicked, addonPrice);
         parentElement.style.border = `1px solid #483eff`;
         addOnsPicked = true;
       } else {
+        // Remove from selected list
+        const title =
+          parentElement.querySelector(".add__on p.title").textContent;
+        selectedAddOns = selectedAddOns.filter((item) => item.title !== title);
+
         parentElement.style.border = `1px solid #d6d9e6`;
         addOnsPicked = false;
       }
+
+      // Call summary to update view
+      summary();
     });
   });
 };
@@ -300,22 +339,6 @@ validateCheckBox();
 const isAnyCheckboxChecked = () => {
   return Array.from(checkBoxes).some((checkBox) => checkBox.checked);
 };
-
-const summary = () => {
-  selectedServices.innerHTML = "";
-
-  if (isAnyCheckboxChecked()) {
-    let html = `
-    <div class = 'services__selected'>
-    <p class = 'service'>${addsPicked}</p>
-    <p class='service__price'>+$${addonPrice}/mo </p>
-    </div>
-    `;
-
-    selectedServices.insertAdjacentHTML("afterbegin", html);
-  }
-};
-summary();
 
 showPage(0);
 
