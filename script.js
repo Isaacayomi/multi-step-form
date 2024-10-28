@@ -143,6 +143,14 @@ const validateInputFields = () => {
 
 const togglePriceBtn = () => {
   toggleBtn.addEventListener("click", () => {
+    // Reset all selected add-ons when toggling between monthly and yearly
+    selectedAddOns = []; // Clear the array of selected add-ons
+    checkBoxes.forEach((checkBox) => {
+      checkBox.checked = false; // Uncheck all checkboxes
+      const parentElement = checkBox.closest(".add__ons__selections");
+      parentElement.style.border = "1px solid #d6d9e6"; // Reset border color
+    });
+
     planCards.forEach((card) => {
       card.style.border = "1px solid #d6d9e6";
     });
@@ -197,9 +205,11 @@ const togglePriceBtn = () => {
       });
     }
 
+    // Update the summary view and recalculate the total price
     summary();
   });
 };
+
 
 const billings = () => {
   planCards.forEach(function (bill) {
@@ -293,20 +303,32 @@ const summary = () => {
   const isYearly = toggleBtn.classList.contains("move__toggle");
   const duration = isYearly ? "yr" : "mo";
 
+  // Get selected plan price based on yearly or monthly
+  const selectedPlanPrice = parseInt(
+    isYearly
+      ? finalPrice.innerHTML.split("/")[0]
+      : finalPrice.innerHTML.split("/")[0]
+  );
+
+  // Loop through selected add-ons and update total
   selectedAddOns.forEach(({ title, price }) => {
     let html = `
       <div class="services__selected">
         <p class="service">${title}</p>
-        <p class="service__price">+$${price}/<span class="addonprice">${duration}</span></p>
+        <p class="service__price">+$${price}/${duration}</p>
       </div>
     `;
-
     selectedServices.insertAdjacentHTML("beforeend", html);
   });
 
-  // Calculate and display total price
+  // Update total price with selected plan and add-ons
   calculateTotal();
 };
+
+toggleBtn.addEventListener("click", () => {
+  togglePriceBtn();
+  summary();
+});
 
 let selectedAddOns = [];
 const validateCheckBox = () => {
@@ -348,43 +370,41 @@ const isAnyCheckboxChecked = () => {
   return Array.from(checkBoxes).some((checkBox) => checkBox.checked);
 };
 
+const changePlan = () => {
+  const changeplan = document.querySelector(".change__plan");
+  changeplan.addEventListener("click", function (e) {
+    console.log("working");
+    // currentPageIndex === 2;
+    showPage(1);
+  });
+};
+changePlan();
+
 showPage(0);
 
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
+
   if (currentPageIndex === 0) {
     if (validateInputFields()) {
       showPage(1);
     }
-  }
-
-  if (currentPageIndex === 1) {
+  } else if (currentPageIndex === 1) {
     if (validatePlanBills()) {
       showPage(2);
     }
-  }
-
-  if (currentPageIndex === 2) {
-    if (isAnyCheckboxChecked()) {
-      currentPageIndex = 3;
-      showPage(3);
-      summary();
-    } else {
-      console.log("None was selected");
-    }
-  }
-
-  if (currentPageIndex === 3) {
-    prevBtn.innerHTML = "";
+  } else if (currentPageIndex === 2) {
+    // Show Step 3 (Add-ons) without requiring selection
+    showPage(3);
+    summary();
+  } else if (currentPageIndex === 3) {
     nextBtn.innerHTML = "Confirm";
     nextBtn.addEventListener("click", function () {
       showPage(4);
-      prevBtn.style.display ='none'
-      nextBtn.style.display ='none'
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
     });
   }
-
- 
 });
 
 prevBtn.addEventListener("click", function (e) {
