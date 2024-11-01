@@ -12,9 +12,10 @@ section {
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #eff5ff;
+  padding-bottom: 7.5rem;
 }
 
-.step__container {
+.steps__list {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +184,7 @@ input::placeholder {
   align-items: center;
   padding-inline: 1rem;
   padding-top: 0.8rem;
-  margin-top: 3rem;
+  margin-bottom: 1rem;
   background-color: white;
 }
 
@@ -602,4 +603,187 @@ p.addson__subheading {
   font-style: normal;
   font-weight: 400;
   line-height: 1.5625rem;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    padding: 1rem;
+    background: var(--BG, #eff5ff);
+    position: relative;
+  }
+
+  section {
+    background-image: none;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    max-width: 58.75rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-bottom: 7.5rem;
+    /* height: 37.5rem; */
+  }
+
+  .step__plan {
+    display: block;
+  }
+
+  .step__plan p {
+    color: #abbcff;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 0.25rem;
+  }
+
+  .step__plan .title {
+    color: #fff;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.0625rem;
+  }
+
+  .step__container {
+    max-width: 17.125rem;
+    width: 100%;
+    height: 35.5rem;
+    background-image: url("./images/Oval.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .steps__list {
+    margin: 0;
+    /* padding-left: 2rem; */
+    padding-top: 2.5rem;
+    max-width: 17.125rem;
+    width: 100%;
+    /* height: 35.5rem; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+  }
+
+  .steps {
+    max-width: 9.5625rem;
+    height: 2.0625rem;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    max-width: 9.5625rem;
+    margin-bottom: 2rem;
+  }
+
+  .step__infos {
+    max-width: 28.125rem;
+    width: 100%;
+    margin-inline: auto;
+    height: 23.25rem;
+  }
+
+  .personal__info .page {
+    margin-top: 0;
+  }
+
+  .personal__info {
+    height: 24.5rem;
+    margin: 0;
+    margin-left: 2rem;
+  }
+
+  .personal__info .error__msg {
+    padding-bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .personal__info h2,
+  .plan h2,
+  .adds__on h2,
+  .summary h2 {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .personal__info p {
+    max-width: 28.125rem;
+    width: 100%;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5625rem;
+  }
+
+  label {
+    padding-bottom: 0.5rem;
+  }
+
+  .input__fields {
+    max-width: 28.125rem;
+    width: 100%;
+  }
+
+  .phone__field {
+    margin-bottom: 1rem;
+  }
+
+  .plan .plan__subheading,
+  .addson__subheading {
+    max-width: 28.125rem;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .add__ons__selections {
+    max-width: 28.125rem;
+    width: 100%;
+    height: 5.0625rem;
+  }
+
+  .add__on .title {
+    padding-bottom: 0.44rem;
+    padding-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .add__on .description {
+    padding-bottom: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .proceedings__btn {
+    position: relative;
+    width: 100%;
+  }
+
+  .add__on__price {
+    font-size: 0.9375rem;
+  }
+
+  .next__btn {
+    position: absolute;
+    right: -8%;
+    margin-top: -7rem;
+    margin-right: 6.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .previous__btn {
+    position: absolute;
+    right: 45%;
+    margin-top: -9rem;
+  }
 }

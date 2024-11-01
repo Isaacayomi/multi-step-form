@@ -1,6 +1,7 @@
 "use strict";
 // Pages
 // const pages = document.querySelectorAll("page");
+const pageSection = document.querySelector("section");
 const pages = document.querySelectorAll(".page");
 const page1 = document.querySelector(".personal__info");
 const page2 = document.querySelector(".plan");
@@ -62,6 +63,7 @@ const phoneErr = document.querySelector(".phone__err");
 // Buttons
 const nextBtn = document.querySelector(".next__btn");
 const prevBtn = document.querySelector(".previous__btn");
+const proceedingsBtn = document.querySelector(".proceeding__btn");
 
 // Checkbox
 const checkBoxes = document.querySelectorAll(".checkbox");
@@ -106,6 +108,8 @@ const showPage = function (pageIndex) {
 };
 
 const validateInputFields = () => {
+  hasError = false; // Reset hasError for each validation
+
   inputs.forEach(function (input, i) {
     if (input.value.trim().length === 0) {
       if (errMsg[i]) {
@@ -117,28 +121,20 @@ const validateInputFields = () => {
       if (errMsg[i]) {
         errMsg[i].style.display = "none";
         input.style.border = "1px solid #d6d9e6";
-        hasError = false;
       }
     }
   });
 
-  //Validate mail
+  // Validate email
   let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!inputEmail.value.match(mailformat)) {
     emailErr.style.display = "block";
     hasError = true;
   } else {
     emailErr.style.display = "none";
-    hasError = false;
   }
 
-  // If there are no errors, proceed
-  if (!hasError) {
-    if (currentPageIndex < pageArray.length - 1) {
-      showPage(currentPageIndex + 1); // Move to the next page
-    }
-  }
-  return;
+  return !hasError; // Return true if no errors, false if there are errors
 };
 
 const togglePriceBtn = () => {
@@ -159,6 +155,9 @@ const togglePriceBtn = () => {
 
     if (isYearly) {
       toggleBtn.classList.add("move__toggle");
+      nextBtn.style.marginTop = "-1.5rem";
+      prevBtn.style.marginTop = "-3rem";
+      pageSection.style.paddingBottom = "2rem";
 
       arcadeBill.textContent = 90;
       advancedBill.textContent = 120;
@@ -209,7 +208,6 @@ const togglePriceBtn = () => {
     summary();
   });
 };
-
 
 const billings = () => {
   planCards.forEach(function (bill) {
