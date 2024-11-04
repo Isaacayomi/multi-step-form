@@ -13,13 +13,13 @@
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./images/Project%20Screenshot.png);
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution URL](https://github.com/Isaacayomi/multi-step-form)
+- Live Site URL: [Add live site URL here](https://multi-step-form-green-beta.vercel.app/)
 
 
 ### Built with
@@ -32,6 +32,6 @@
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [Isaac Ayomide](https://github.com/Isaacayomi)
+- Frontend Mentor - [@Isaacayomi](https://www.frontendmentor.io/profile/Isaacayomi)
+- Twitter - [@seekerr_07](https://www.twitter.com/seekerr_07)
