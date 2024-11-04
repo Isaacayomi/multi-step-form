@@ -152,12 +152,22 @@ const togglePriceBtn = () => {
     });
 
     const isYearly = !toggleBtn.classList.contains("move__toggle");
+    const mediaQuery = window.matchMedia("(max-width: 1000px)");
 
     if (isYearly) {
       toggleBtn.classList.add("move__toggle");
-      nextBtn.style.marginTop = "-1.5rem";
-      prevBtn.style.marginTop = "-3rem";
-      pageSection.style.paddingBottom = "2rem";
+
+      // if screensize is less than 1000px
+      if (mediaQuery.matches) {
+        console.log("less than 1000px");
+        nextBtn.style.marginTop = "-1.5rem";
+        prevBtn.style.marginTop = "-3rem";
+        pageSection.style.paddingBottom = "2rem";
+      } else {
+        nextBtn.style.marginTop = "";
+        prevBtn.style.marginTop = "";
+        pageSection.style.paddingBottom = "";
+      }
 
       arcadeBill.textContent = 90;
       advancedBill.textContent = 120;
@@ -228,11 +238,11 @@ const billings = () => {
         if (priceElement1.innerText.trim().length > 2) {
           durationSelected.innerHTML = ` (Yearly)`;
           finalPriceDuration.innerHTML = "yr";
-          finalPrice.innerHTML = `${priceElement1.innerText.trim()}/yr`;
+          finalPrice.innerHTML = `$${priceElement1.innerText.trim()}/yr`;
         } else {
           durationSelected.innerHTML = ` (Monthly)`;
           finalPriceDuration.innerHTML = "mo";
-          finalPrice.innerHTML = `${priceElement1.innerText.trim()}/mo`;
+          finalPrice.innerHTML = `$${priceElement1.innerText.trim()}/mo`;
         }
       }
     });

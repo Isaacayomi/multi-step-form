@@ -108,8 +108,10 @@ input {
 }
 
 input:focus,
-input:active {
+input:active,
+input:hover {
   outline: 1px solid #483eff;
+  cursor: pointer;
 }
 
 form {
@@ -183,7 +185,7 @@ input::placeholder {
   justify-content: space-between;
   align-items: center;
   padding-inline: 1rem;
-  padding-top: 0.8rem;
+  padding-top: 2rem;
   margin-bottom: 1rem;
   background-color: white;
 }
@@ -230,6 +232,10 @@ input::placeholder {
 
 .billings {
   margin-bottom: 2.31rem;
+}
+
+.billings__plan:hover {
+  border: 1px solid rgb(72, 62, 255);
 }
 
 .plan .plan__subheading,
@@ -455,7 +461,8 @@ p.addson__subheading {
 .checkout__section {
   border-radius: 0.5rem;
   background: #f8f9ff;
-  width: 18.4375rem;
+  max-width: 18.4375rem;
+  width: 100%;
   height: 9.25rem;
   margin: auto;
 }
@@ -605,7 +612,7 @@ p.addson__subheading {
   line-height: 1.5625rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 750px) {
   body {
     padding: 1rem;
     background: var(--BG, #eff5ff);
@@ -621,9 +628,9 @@ p.addson__subheading {
 
     max-width: 58.75rem;
     width: 100%;
+    height: 37.5rem;
     margin-inline: auto;
     padding-bottom: 7.5rem;
-    /* height: 37.5rem; */
   }
 
   .step__plan {
@@ -765,6 +772,7 @@ p.addson__subheading {
   }
 
   .proceedings__btn {
+    padding-top: 0rem;
     position: relative;
     width: 100%;
   }
@@ -773,17 +781,260 @@ p.addson__subheading {
     font-size: 0.9375rem;
   }
 
+  .summary {
+    box-shadow: none;
+  }
+
+  .summary__subheading {
+    max-width: 28.125rem;
+    width: 100%;
+  }
+
+  .checkout__section {
+    max-width: 28.125rem;
+    width: 100%;
+    height: 14.25rem;
+  }
+
+  .checkout {
+    padding-inline: 0rem;
+    padding-top: 1rem;
+    padding-bottom: 0.44rem;
+  }
+
+  .summary__thanks {
+    max-width: 28.125rem;
+    width: 100%;
+    height: 14.875rem;
+    padding-top: 8rem;
+    padding-inline: 1rem;
+    box-shadow: none;
+  }
+
+  .summary__thanks p:nth-child(odd) {
+    max-width: 28.125rem;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .summary__thanks p:nth-child(even) {
+    font-size: 2rem;
+  }
+
+  .summary__thanks img {
+    padding-top: 0;
+    max-width: 5rem;
+    width: 100%;
+  }
+
   .next__btn {
     position: absolute;
     right: -8%;
     margin-top: -7rem;
     margin-right: 6.25rem;
     margin-bottom: 2rem;
+    z-index: 0;
   }
 
   .previous__btn {
     position: absolute;
     right: 45%;
     margin-top: -9rem;
+    z-index: 0;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  section {
+    position: relative;
+  }
+
+  .step__infos {
+    max-width: 58.75rem;
+    width: 100%;
+  }
+
+  .personal__info,
+  .plan,
+  .adds__on,
+  .summary {
+    max-width: 35rem;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .personal__info p,
+  .plan p {
+    max-width: 35rem;
+    width: 100%;
+  }
+
+  .personal__info h2,
+  .plan h2,
+  .adds__on h2,
+  .summary h2 {
+    padding-top: 3.5rem;
+  }
+
+  form {
+    max-width: 35rem;
+    padding-inline: 2rem;
+    width: 100%;
+  }
+
+  .billings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 28.125rem;
+    width: 100%;
+    margin-inline: auto;
+    height: 10rem;
+    margin-left: 1.5rem;
+  }
+
+  .billings__plan {
+    max-width: 8.625rem;
+    width: 100%;
+    height: 11.4375rem;
+  }
+
+  .arcarde,
+  .advanced,
+  .pro {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.44rem;
+  }
+
+  input {
+    max-width: 28.125rem;
+    width: 100%;
+    height: 3rem;
+  }
+
+  .add__ons__selections {
+    max-width: 28.125rem;
+    width: 100%;
+    height: 5.0625rem;
+    justify-content: flex-start;
+    margin-inline: 0rem;
+    margin-left: 1.5rem;
+  }
+
+  .add__on {
+    margin-left: 1.5rem;
+    /* margin-right: 7rem; */
+  }
+
+  .add__on__price {
+    margin-left: auto;
+    padding-right: 1.5rem;
+  }
+
+  .checkbox:checked {
+    accent-color: #483eff;
+  }
+
+  .checkout {
+    max-width: 28.125rem;
+    width: 100%;
+  }
+
+  .checkout__section {
+    margin-left: 1.5rem;
+  }
+
+  .plan__selected {
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  p.change__plan {
+    padding-top: 0.44rem;
+  }
+
+  p.price {
+    padding-right: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .services__selected,
+  .total {
+    max-width: 28.125rem;
+    width: 100%;
+    margin-inline: 0rem;
+    padding-left: 1.5rem;
+  }
+
+  .service__price {
+    margin-left: auto;
+    padding-right: 1.5rem;
+  }
+
+  .total__price {
+    margin-right: 1.5rem;
+  }
+
+  .arcarde img,
+  .advanced img,
+  .pro img {
+    padding-top: 1rem;
+  }
+
+  p.bonus__plan {
+    padding-bottom: 0.7rem;
+  }
+
+  .toggle__bill {
+    max-width: 28.125rem;
+    width: 100%;
+    margin: auto;
+  }
+
+  .next__btn {
+    right: 12%;
+  }
+
+  .next__btn:hover {
+    background-color: #928cff;
+  }
+
+  .previous__btn:hover {
+    color: #022959;
+  }
+
+  .previous__btn {
+    right: 55%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+/* main {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+ 
+} */
+
+
+  main {
+    max-width: 58.75rem;
+    width: 100%;
+    margin: auto;
+    border: 1px solid black;
+    height: 100vh;
+    position: relative;
+  }
+
+  section {
+    border: 1px solid red;
+    max-width: 58.75rem;
+    width: 100%;
+    position: absolute;
+    top: 30%;   
   }
 }
