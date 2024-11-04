@@ -13,7 +13,7 @@
 
 ### Screenshot
 
-![Project Screenshot](./images/Project-Screenshot.png);
+![Project Screenshot](./images/project-screenshot.jpg);
 
 
 ### Links
