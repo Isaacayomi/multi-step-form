@@ -280,12 +280,20 @@ const calculateTotal = () => {
   const isYearly = toggleBtn.classList.contains("move__toggle");
   const duration = isYearly ? "yr" : "mo";
 
-  // Initialize the total price
-  let total = 0;
+  // Initialize the total price with the selected plan price
+  let planPriceText = finalPrice.innerHTML.split("/")[0]; // Get price part only
+  let planPrice = parseInt(planPriceText.replace("$", "").trim(), 10); // Remove '$' and parse
 
-  // Loop through the selected add-ons to calculate the total price
+  // Check if planPrice is a valid number; if not, set it to 0
+  planPrice = isNaN(planPrice) ? 0 : planPrice;
+
+  // Initialize total with the plan price
+  let total = planPrice;
+
+  // Add prices of selected add-ons to the total
   selectedAddOns.forEach(({ price }) => {
-    total += parseInt(price, 10); // Ensure price is converted to a number
+    const addOnPrice = parseInt(price, 10); // Ensure price is converted to a number
+    total += isNaN(addOnPrice) ? 0 : addOnPrice; // Add add-on price if valid
   });
 
   // Update the total price element
@@ -294,49 +302,54 @@ const calculateTotal = () => {
 
   // Update the total price label based on the duration
   const totalLabelElement = document.querySelector(".total__selected");
-  if (isYearly) {
-    totalLabelElement.innerText = "Total (Per Year)";
-  } else {
-    totalLabelElement.innerText = "Total (Per Month)";
-  }
+  totalLabelElement.innerText = isYearly ? "Total (Per Year)" : "Total (Per Month)";
 };
 
-let addOnsPicked = false;
-let addsPicked = "";
-let addonPrice = "";
-
+// Modify the summary function to include the selected plan details
 const summary = () => {
   selectedServices.innerHTML = ""; // Clear previous list
 
   const isYearly = toggleBtn.classList.contains("move__toggle");
   const duration = isYearly ? "yr" : "mo";
 
-  // Get selected plan price based on yearly or monthly
-  const selectedPlanPrice = parseInt(
-    isYearly
-      ? finalPrice.innerHTML.split("/")[0]
-      : finalPrice.innerHTML.split("/")[0]
-  );
+  // Get selected plan and add it to the summary
+  const selectedPlanName = planSelected.innerHTML || "No Plan Selected";
+  let selectedPlanPriceText = finalPrice.innerHTML.split("/")[0];
+  let selectedPlanPrice = parseInt(selectedPlanPriceText.replace("$", "").trim(), 10);
+  selectedPlanPrice = isNaN(selectedPlanPrice) ? 0 : selectedPlanPrice;
 
-  // Loop through selected add-ons and update total
+  const planHTML = `
+    <div class="services__selected">
+      <p class="service">${selectedPlanName} (${duration})</p>
+      <p class="service__price">+$${selectedPlanPrice}/${duration}</p>
+    </div>
+  `;
+  selectedServices.insertAdjacentHTML("beforeend", planHTML);
+
+  // Loop through selected add-ons and add them to the summary
   selectedAddOns.forEach(({ title, price }) => {
-    let html = `
+    let addOnPrice = parseInt(price, 10);
+    addOnPrice = isNaN(addOnPrice) ? 0 : addOnPrice;
+    
+    let addOnHTML = `
       <div class="services__selected">
         <p class="service">${title}</p>
-        <p class="service__price">+$${price}/${duration}</p>
+        <p class="service__price">+$${addOnPrice}/${duration}</p>
       </div>
     `;
-    selectedServices.insertAdjacentHTML("beforeend", html);
+    selectedServices.insertAdjacentHTML("beforeend", addOnHTML);
   });
 
-  // Update total price with selected plan and add-ons
+  // Calculate and update the total price
   calculateTotal();
 };
 
+// Call summary function whenever changes occur in plan selection or toggle
 toggleBtn.addEventListener("click", () => {
   togglePriceBtn();
   summary();
 });
+
 
 let selectedAddOns = [];
 const validateCheckBox = () => {
