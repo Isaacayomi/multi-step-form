@@ -13,13 +13,13 @@
 
 ### Screenshot
 
-![(./images/Project%20Screenshot.png)];
+![Project Screenshot](./images/Project%20Screenshot.png);
 
 
 ### Links
 
 - Solution URL: [Solution URL](https://github.com/Isaacayomi/multi-step-form)
-- Live Site URL: [Add live site URL here](https://multi-step-form-green-beta.vercel.app/)
+- Live Site URL: [Live URL](https://multi-step-form-green-beta.vercel.app/)
 
 
 ### Built with
